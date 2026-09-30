@@ -2,889 +2,256 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>YUVA Education AI</title>
-
 <style>
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f3f6fb;
-    color:#172033;
-}
-
-header{
-    background:#172b4d;
-    color:white;
-    text-align:center;
-    padding:22px 15px;
-}
-
-header h1{
-    margin:0;
-    font-size:28px;
-}
-
-header p{
-    margin:7px 0 0;
-    opacity:.85;
-}
-
-.container{
-    max-width:850px;
-    margin:25px auto;
-    padding:0 15px;
-}
-
-.card{
-    background:white;
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:18px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-.status{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-weight:bold;
-}
-
-.dot{
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:#f59e0b;
-}
-
-.dot.ready{
-    background:#16a34a;
-}
-
-.progress{
-    width:100%;
-    height:8px;
-    background:#e5e7eb;
-    border-radius:10px;
-    overflow:hidden;
-    margin-top:12px;
-}
-
-.progress-bar{
-    width:0%;
-    height:100%;
-    background:#2563eb;
-    transition:.3s;
-}
-
-button,
-select{
-    border:none;
-    border-radius:10px;
-    padding:11px 15px;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.primary{
-    background:#172b4d;
-    color:white;
-}
-
-.secondary{
-    background:#e8eef8;
-    color:#172b4d;
-}
-
-button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-textarea{
-    width:100%;
-    min-height:100px;
-    resize:vertical;
-    border:1px solid #d6dce5;
-    border-radius:12px;
-    padding:14px;
-    font-size:16px;
-    outline:none;
-}
-
-textarea:focus{
-    border-color:#2563eb;
-}
-
-.controls{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:12px;
-}
-
-.chat{
-    min-height:250px;
-    max-height:500px;
-    overflow-y:auto;
-}
-
-.message{
-    padding:14px;
-    border-radius:14px;
-    margin:10px 0;
-    line-height:1.6;
-    white-space:pre-wrap;
-}
-
-.user{
-    background:#172b4d;
-    color:white;
-    margin-left:10%;
-}
-
-.ai{
-    background:#eef2f7;
-    color:#172033;
-    margin-right:10%;
-}
-
-.answer-title{
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.small{
-    font-size:13px;
-    color:#667085;
-}
-
-.warning{
-    background:#fff7ed;
-    color:#9a3412;
-    padding:12px;
-    border-radius:10px;
-    margin-top:12px;
-    font-size:14px;
-}
-
-@media(max-width:600px){
-    header h1{
-        font-size:23px;
-    }
-
-    .container{
-        margin-top:15px;
-    }
-
-    .user,
-    .ai{
-        margin-left:0;
-        margin-right:0;
-    }
-
-    button{
-        flex:1;
-    }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#172033}
+header{background:#172b4d;color:#fff;text-align:center;padding:22px 15px}
+header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0;opacity:.85}
+.container{max-width:900px;margin:22px auto;padding:0 14px}
+.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+.status{display:flex;align-items:center;gap:8px;font-weight:bold}
+.dot{width:12px;height:12px;border-radius:50%;background:#f59e0b}
+.dot.ready{background:#16a34a}
+.progress{height:8px;background:#e5e7eb;border-radius:10px;overflow:hidden;margin:12px 0}
+.progress-bar{height:100%;width:0;background:#2563eb;transition:.3s}
+textarea{width:100%;min-height:100px;border:1px solid #d6dce5;border-radius:12px;padding:14px;font-size:16px;resize:vertical}
+button,select{border:0;border-radius:10px;padding:11px 14px;font-size:14px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:#172b4d;color:#fff}.secondary{background:#e8eef8;color:#172b4d}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chat{max-height:520px;overflow-y:auto;min-height:220px}
+.message{padding:13px 15px;border-radius:14px;margin:10px 0;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.user{background:#172b4d;color:#fff;margin-left:10%}
+.ai{background:#eef2f7;margin-right:10%}
+.small{font-size:13px;color:#667085}
+.notice{background:#fff7ed;color:#9a3412;padding:11px;border-radius:10px;font-size:13px;margin-top:10px}
+.preview{max-width:100%;max-height:300px;border-radius:12px;margin-top:10px;display:none}
+.file-label{display:inline-block;background:#e8eef8;color:#172b4d;padding:11px 14px;border-radius:10px;cursor:pointer}
+input[type=file]{display:none}
+@media(max-width:600px){header h1{font-size:23px}.user,.ai{margin-left:0;margin-right:0}button,select,.file-label{flex:1;text-align:center}}
 </style>
 </head>
-
 <body>
-
 <header>
-    <h1>🎓 YUVA Education AI</h1>
-    <p>Private • Local • Education Assistant</p>
+<h1>🎓 YUVA Education AI</h1>
+<p>Private • Local • Education Assistant</p>
 </header>
 
 <div class="container">
 
-    <!-- AI STATUS -->
-    <div class="card">
+<div class="card">
+<div class="status"><span id="dot" class="dot"></span><span id="status">Local AI Not Loaded</span></div>
+<div class="progress"><div id="bar" class="progress-bar"></div></div>
+<p id="loadText" class="small">Click Load Local AI to start.</p>
+<button id="loadBtn" class="primary" onclick="loadAI()">🧠 Load Local AI</button>
+<div class="notice">The model runs in this browser. No API key is stored here. The first load requires internet to download the model.</div>
+</div>
 
-        <div class="status">
-            <span id="statusDot" class="dot"></span>
-            <span id="statusText">Local AI Not Loaded</span>
-        </div>
+<div class="card">
+<div id="chat" class="chat">
+<div class="message ai">🤖 <b>YUVA AI</b><br><br>Hello Yuva! 👋<br>Ask an educational question in English or Tamil.<br><br>🎤 Voice • 🔊 Speak • 📷 Image/OCR</div>
+</div>
+</div>
 
-        <div class="progress">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
+<div class="card">
+<textarea id="question" placeholder="Ask an education question..."></textarea>
 
-        <p id="loadMessage" class="small">
-            Click "Load Local AI" to start.
-        </p>
+<div class="controls">
+<select id="voiceLang">
+<option value="ta-IN">தமிழ்</option>
+<option value="en-IN">English</option>
+</select>
+<button class="secondary" onclick="startVoice()">🎤 Voice</button>
+<button id="sendBtn" class="primary" onclick="sendQuestion()">Send</button>
+</div>
 
-        <button
-            id="loadButton"
-            class="primary"
-            onclick="loadAI()">
-            🧠 Load Local AI
-        </button>
+<div class="controls">
+<label class="file-label">📷 Image
+<input id="imageInput" type="file" accept="image/*">
+</label>
+<button class="secondary" onclick="speakAnswer()">🔊 Speak</button>
+<button class="secondary" onclick="stopSpeak()">⏹ Stop</button>
+<button class="secondary" onclick="clearChat()">🗑 Clear</button>
+</div>
 
-        <div class="warning">
-            First loading may take time because the AI model is downloaded
-            to your browser. No API key is required.
-        </div>
-
-    </div>
-
-
-    <!-- CHAT -->
-    <div class="card">
-
-        <div id="chatBox" class="chat">
-
-            <div class="message ai">
-                <div class="answer-title">
-                    🤖 YUVA AI
-                </div>
-
-                Hello Yuva! 👋
-
-                Ask me an educational question.
-
-                You can type or use 🎤 Voice.
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- INPUT -->
-    <div class="card">
-
-        <textarea
-            id="question"
-            placeholder="Ask your education question..."></textarea>
-
-        <div class="controls">
-
-            <select id="voiceLanguage">
-                <option value="ta-IN">தமிழ் Voice</option>
-                <option value="en-IN">English Voice</option>
-            </select>
-
-            <button
-                class="secondary"
-                onclick="startVoice()">
-                🎤 Voice
-            </button>
-
-            <button
-                class="primary"
-                id="sendButton"
-                onclick="sendQuestion()">
-                Send
-            </button>
-
-        </div>
-
-        <div class="controls">
-
-            <button
-                class="secondary"
-                onclick="speakLastAnswer()">
-                🔊 Speak
-            </button>
-
-            <button
-                class="secondary"
-                onclick="stopSpeaking()">
-                ⏹ Stop
-            </button>
-
-            <button
-                class="secondary"
-                onclick="clearChat()">
-                🗑 Clear
-            </button>
-
-        </div>
-
-        <p id="voiceStatus" class="small"></p>
-
-    </div>
+<img id="preview" class="preview" alt="Selected image">
+<p id="voiceStatus" class="small"></p>
+</div>
 
 </div>
 
-
 <script type="module">
+import {CreateMLCEngine} from "https://esm.run/@mlc-ai/web-llm";
 
-import {
-    CreateMLCEngine
-} from "https://esm.run/@mlc-ai/web-llm";
+const MODEL="Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
+let engine=null, ready=false, lastAnswer="";
+let imageText="";
 
-
-/*
-====================================================
-YUVA EDUCATION AI
-LOCAL MODEL
-====================================================
-*/
-
-const MODEL =
-    "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
-
-let engine = null;
-let aiReady = false;
-let lastAnswer = "";
-
-
-/*
-====================================================
-ELEMENTS
-====================================================
-*/
-
-const statusText =
-    document.getElementById("statusText");
-
-const statusDot =
-    document.getElementById("statusDot");
-
-const progressBar =
-    document.getElementById("progressBar");
-
-const loadMessage =
-    document.getElementById("loadMessage");
-
-const loadButton =
-    document.getElementById("loadButton");
-
-const sendButton =
-    document.getElementById("sendButton");
-
-const questionInput =
-    document.getElementById("question");
-
-const chatBox =
-    document.getElementById("chatBox");
-
-
-/*
-====================================================
-CHECK WEBGPU
-====================================================
-*/
-
-async function checkWebGPU(){
-
-    if(!navigator.gpu){
-
-        statusText.textContent =
-            "WebGPU Not Supported";
-
-        loadMessage.textContent =
-            "Your browser/device does not support WebGPU.";
-
-        loadButton.disabled = true;
-
-        return false;
-    }
-
-    return true;
-}
-
-
-/*
-====================================================
-LOAD LOCAL AI
-====================================================
-*/
-
-window.loadAI = async function(){
-
-    const supported =
-        await checkWebGPU();
-
-    if(!supported) return;
-
-    loadButton.disabled = true;
-
-    statusText.textContent =
-        "Loading Local AI...";
-
-    loadMessage.textContent =
-        "Downloading and preparing the local AI model...";
-
-    progressBar.style.width = "5%";
-
-    try{
-
-        engine = await CreateMLCEngine(
-            MODEL,
-            {
-
-                initProgressCallback:
-                function(progress){
-
-                    let value =
-                        Math.round(
-                            progress.progress * 100
-                        );
-
-                    if(isNaN(value)){
-                        value = 10;
-                    }
-
-                    progressBar.style.width =
-                        value + "%";
-
-                    loadMessage.textContent =
-                        progress.text || "Loading AI...";
-                }
-
-            }
-        );
-
-        aiReady = true;
-
-        progressBar.style.width = "100%";
-
-        statusDot.classList.add("ready");
-
-        statusText.textContent =
-            "Local AI Ready";
-
-        loadMessage.textContent =
-            "AI model loaded in this browser.";
-
-        loadButton.textContent =
-            "✅ AI Loaded";
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        aiReady = false;
-
-        loadButton.disabled = false;
-
-        statusText.textContent =
-            "AI Loading Failed";
-
-        loadMessage.textContent =
-            error.message ||
-            "Unable to load local AI.";
-
-        progressBar.style.width = "0%";
-    }
-};
-
-
-/*
-====================================================
-ADD MESSAGE
-====================================================
-*/
+const $=id=>document.getElementById(id);
 
 function addMessage(text,type){
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message " + type;
-
-    message.textContent =
-        text;
-
-    chatBox.appendChild(message);
-
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-    return message;
+  const el=document.createElement("div");
+  el.className="message "+type;
+  el.textContent=text;
+  $("chat").appendChild(el);
+  $("chat").scrollTop=$("chat").scrollHeight;
+  return el;
 }
 
+async function webgpuOK(){
+  if(!navigator.gpu){
+    $("status").textContent="WebGPU Not Supported";
+    $("loadText").textContent="This browser/device does not provide WebGPU.";
+    $("loadBtn").disabled=true;
+    return false;
+  }
+  return true;
+}
 
-/*
-====================================================
-SEND QUESTION
-====================================================
-*/
+window.loadAI=async function(){
+  if(!(await webgpuOK())) return;
+  $("loadBtn").disabled=true;
+  $("status").textContent="Loading Local AI...";
+  $("loadText").textContent="Downloading/preparing model...";
+  try{
+    engine=await CreateMLCEngine(MODEL,{
+      initProgressCallback:p=>{
+        const n=Math.max(0,Math.min(100,Math.round((p.progress||0)*100)));
+        $("bar").style.width=n+"%";
+        $("loadText").textContent=p.text||"Loading...";
+      }
+    });
+    ready=true;
+    $("bar").style.width="100%";
+    $("dot").classList.add("ready");
+    $("status").textContent="Local AI Ready";
+    $("loadText").textContent="AI model loaded on this browser.";
+    $("loadBtn").textContent="✅ AI Loaded";
+  }catch(e){
+    console.error(e);
+    $("status").textContent="AI Loading Failed";
+    $("loadText").textContent=e.message||"Unable to load model.";
+    $("loadBtn").disabled=false;
+  }
+};
 
-window.sendQuestion = async function(){
-
-    const question =
-        questionInput.value.trim();
-
-    if(!question){
-        return;
-    }
-
-    if(!aiReady){
-
-        alert(
-            "First click 'Load Local AI'."
-        );
-
-        return;
-    }
-
-    addMessage(
-        question,
-        "user"
-    );
-
-    questionInput.value = "";
-
-    sendButton.disabled = true;
-
-    const loadingMessage =
-        addMessage(
-            "🤔 Thinking...",
-            "ai"
-        );
-
-    try{
-
-        const systemPrompt = `
-
-You are YUVA Education AI.
-
-Your main purpose is education and learning.
-
-Answer questions clearly and accurately.
-
-Explain difficult topics in simple language.
-
-When appropriate:
-- give examples
-- give step-by-step explanations
-- give formulas
-- give code examples
-- explain concepts for students
-
-If you are not sure about an answer,
-do not pretend to know it.
-
-Say clearly when you are uncertain.
-
-Never invent facts.
-
-For mathematics, show the calculation.
-
-For programming questions,
-give correct and understandable code.
-
-The user may communicate in Tamil or English.
-
-If the user asks in Tamil,
-answer in Tamil.
-
-If the user asks in English,
-answer in English.
-
-Keep educational answers organized and easy to understand.
-
+const systemPrompt=`You are YUVA Education AI, a careful educational tutor.
+Answer only with useful educational information.
+If the user asks in Tamil, answer in clear natural Tamil. If English, answer in English.
+For programming, give correct syntax and a short example.
+For mathematics, show steps and check the result.
+For science, explain the concept and distinguish facts from assumptions.
+Do not invent facts. If you are uncertain, say so clearly.
+Do not claim 100% certainty when the model cannot verify something.
+Keep answers structured with headings or bullet points when helpful.
 `;
 
-        const response =
-            await engine.chat.completions.create({
-
-                messages:[
-
-                    {
-                        role:"system",
-                        content:systemPrompt
-                    },
-
-                    {
-                        role:"user",
-                        content:question
-                    }
-
-                ],
-
-                temperature:0.2,
-
-                max_tokens:700
-            });
-
-
-        const answer =
-            response.choices[0]
-            .message
-            .content
-            .trim();
-
-
-        lastAnswer = answer;
-
-        loadingMessage.textContent =
-            "🤖 " + answer;
-
-        chatBox.scrollTop =
-            chatBox.scrollHeight;
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        loadingMessage.textContent =
-            "❌ Error: " +
-            error.message;
-    }
-
-    sendButton.disabled = false;
+window.sendQuestion=async function(){
+  if(!ready){alert("First click Load Local AI.");return}
+  const q=$("question").value.trim();
+  if(!q && !imageText){return}
+  let prompt=q;
+  if(imageText){
+    prompt=(q?q+"\n\n":"")+"Text extracted from the uploaded image:\n"+imageText+
+      "\n\nUse the extracted text to answer the educational question. If OCR is unclear, say which part is unclear.";
+  }
+  addMessage(q || "📷 Image question", "user");
+  $("question").value="";
+  imageText="";
+  $("sendBtn").disabled=true;
+  const el=addMessage("🤔 Thinking...","ai");
+  try{
+    const r=await engine.chat.completions.create({
+      messages:[
+        {role:"system",content:systemPrompt},
+        {role:"user",content:prompt}
+      ],
+      temperature:.2,
+      max_tokens:700
+    });
+    lastAnswer=(r.choices?.[0]?.message?.content||"No answer returned.").trim();
+    el.textContent="🤖 "+lastAnswer;
+  }catch(e){
+    console.error(e);
+    el.textContent="❌ Error: "+(e.message||e);
+  }
+  $("sendBtn").disabled=false;
 };
 
+$("question").addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendQuestion();}
+});
 
-/*
-====================================================
-ENTER KEY
-====================================================
-*/
+window.startVoice=function(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert("Voice recognition is not supported in this browser.");return}
+  const r=new SR();
+  r.lang=$("voiceLang").value;
+  r.continuous=false;
+  r.interimResults=false;
+  r.onstart=()=>{$("voiceStatus").textContent="🎤 Listening... பேசுங்கள்";}
+  r.onresult=e=>{
+    $("question").value=e.results[0][0].transcript;
+    $("voiceStatus").textContent="✅ Voice received";
+    sendQuestion();
+  };
+  r.onerror=e=>$("voiceStatus").textContent="❌ Voice error: "+e.error;
+  r.onend=()=>setTimeout(()=>$("voiceStatus").textContent="",1500);
+  r.start();
+};
 
-questionInput.addEventListener(
-    "keydown",
-    function(event){
+window.speakAnswer=function(){
+  if(!lastAnswer){alert("First get an AI answer.");return}
+  if(!("speechSynthesis" in window)){alert("Text-to-Speech is not supported.");return}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(lastAnswer);
+  u.lang=/[\u0B80-\u0BFF]/.test(lastAnswer)?"ta-IN":"en-IN";
+  u.rate=.9;
+  speechSynthesis.speak(u);
+};
+window.stopSpeak=function(){if("speechSynthesis"in window)speechSynthesis.cancel()};
 
-        if(
-            event.key === "Enter" &&
-            !event.shiftKey
-        ){
+window.clearChat=function(){
+  $("chat").innerHTML='<div class="message ai">🤖 Chat cleared. Ask your next educational question.</div>';
+  lastAnswer="";
+};
 
-            event.preventDefault();
-
-            sendQuestion();
+async function OCR(file){
+  const preview=$("preview");
+  preview.src=URL.createObjectURL(file);
+  preview.style.display="block";
+  $("voiceStatus").textContent="📷 Reading image text...";
+  try{
+    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js");
+    const {data}=await mod.recognize(file,"eng+tam",{
+      logger:m=>{
+        if(m.status==="recognizing text"&&typeof m.progress==="number"){
+          $("voiceStatus").textContent="📷 OCR "+Math.round(m.progress*100)+"%";
         }
-
-    }
-);
-
-
-/*
-====================================================
-VOICE INPUT
-====================================================
-*/
-
-window.startVoice = function(){
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-    if(!SpeechRecognition){
-
-        alert(
-            "Voice recognition is not supported in this browser."
-        );
-
-        return;
-    }
-
-    const recognition =
-        new SpeechRecognition();
-
-    recognition.lang =
-        document.getElementById(
-            "voiceLanguage"
-        ).value;
-
-    recognition.continuous =
-        false;
-
-    recognition.interimResults =
-        false;
-
-    const voiceStatus =
-        document.getElementById(
-            "voiceStatus"
-        );
-
-    recognition.onstart =
-        function(){
-
-            voiceStatus.textContent =
-                "🎤 Listening... பேசுங்கள்...";
-        };
-
-
-    recognition.onresult =
-        function(event){
-
-            const text =
-                event.results[0][0]
-                .transcript;
-
-            questionInput.value =
-                text;
-
-            voiceStatus.textContent =
-                "✅ Voice received";
-
-            /*
-            Automatically send
-            */
-
-            sendQuestion();
-        };
-
-
-    recognition.onerror =
-        function(event){
-
-            voiceStatus.textContent =
-                "❌ Voice error: " +
-                event.error;
-        };
-
-
-    recognition.onend =
-        function(){
-
-            setTimeout(
-                function(){
-
-                    voiceStatus.textContent =
-                        "";
-
-                },
-                1500
-            );
-        };
-
-
-    recognition.start();
-};
-
-
-/*
-====================================================
-TEXT TO SPEECH
-====================================================
-*/
-
-window.speakLastAnswer = function(){
-
-    if(!lastAnswer){
-
-        alert(
-            "First ask a question and get an answer."
-        );
-
-        return;
-    }
-
-    if(!("speechSynthesis" in window)){
-
-        alert(
-            "Text-to-Speech is not supported."
-        );
-
-        return;
-    }
-
-    speechSynthesis.cancel();
-
-    const speech =
-        new SpeechSynthesisUtterance(
-            lastAnswer
-        );
-
-
-    /*
-    Detect Tamil
-    */
-
-    if(
-        /[\u0B80-\u0BFF]/.test(
-            lastAnswer
-        )
-    ){
-
-        speech.lang =
-            "ta-IN";
-
-    }
-    else{
-
-        speech.lang =
-            "en-IN";
-    }
-
-
-    speech.rate =
-        0.9;
-
-    speech.pitch =
-        1;
-
-    speech.volume =
-        1;
-
-
-    speechSynthesis.speak(
-        speech
-    );
-};
-
-
-/*
-====================================================
-STOP SPEAKING
-====================================================
-*/
-
-window.stopSpeaking = function(){
-
-    if("speechSynthesis" in window){
-
-        speechSynthesis.cancel();
-    }
-};
-
-
-/*
-====================================================
-CLEAR CHAT
-====================================================
-*/
-
-window.clearChat = function(){
-
-    chatBox.innerHTML = `
-
-        <div class="message ai">
-
-            <div class="answer-title">
-                🤖 YUVA AI
-            </div>
-
-            Chat cleared.
-
-            Ask your next educational question.
-
-        </div>
-
-    `;
-
-    lastAnswer = "";
-};
-
-
-/*
-====================================================
-INITIAL WEBGPU CHECK
-====================================================
-*/
-
-checkWebGPU();
-
+      }
+    });
+    imageText=(data.text||"").trim();
+    $("question").value=imageText
+      ? "Explain and answer the question in this image."
+      : "";
+    $("voiceStatus").textContent=imageText
+      ?"✅ Image text read. Press Send."
+      :"⚠️ Could not read useful text from image.";
+  }catch(e){
+    console.error(e);
+    $("voiceStatus").textContent="❌ Image reading failed.";
+  }
+}
+
+$("imageInput").addEventListener("change",e=>{
+  const f=e.target.files?.[0];
+  if(f) OCR(f);
+});
+
+webgpuOK();
 </script>
-
 </body>
 </html>
